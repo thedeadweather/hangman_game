@@ -4,11 +4,11 @@ class ConsoleInterface
       sort.
       map { |file_name| File.read(file_name) }
 
-# на входе объект игры
+  # на входе объект игры
   def initialize(game)
     @game = game
   end
-# вывод состояния (макета)
+  # вывод состояния (макета)
   def print_out
     puts <<~END
       Слово: #{word_to_show}
@@ -26,12 +26,12 @@ class ConsoleInterface
     end
   end
 
-# вывод картинки в соответстии с кол-вом ошибок
+  # вывод картинки в соответстии с кол-вом ошибок
   def figure
     return FIGURES[@game.errors_made]
   end
 
-# вывод отгаданных букв
+  # вывод отгаданных букв
   def word_to_show
     result =
       @game.letters_to_guess.map do |letter|
@@ -45,12 +45,12 @@ class ConsoleInterface
     return result.join(' ')
   end
 
-# вывод ошибок
+  # вывод ошибок
   def errors_to_show
     return @game.errors.join(', ')
   end
 
-# ввод варианта
+  # ввод варианта
   def get_input
     print "Введите следующую букву: "
     letter = gets[0].upcase
