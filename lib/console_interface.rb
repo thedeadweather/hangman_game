@@ -1,3 +1,5 @@
+require 'colorize'
+
 class ConsoleInterface
   FIGURES =
       Dir[__dir__ + '/../data/figures/*.txt'].
@@ -10,19 +12,16 @@ class ConsoleInterface
   end
   # вывод состояния (макета)
   def print_out
-    puts <<~END
-      Слово: #{word_to_show}
-      #{figure}
-      Ошибки (#{@game.errors_made}): #{errors_to_show}
-      У вас осталось ошибок: #{@game.errors_allowed}
-
-    END
+    puts %(Слово: #{word_to_show}\n).colorize(:light_blue) +
+         %(#{figure}\n).colorize(:yellow) +
+         %(Ошибки (#{@game.errors_made}): #{errors_to_show}\n).colorize(:red) +
+         %(У вас осталось ошибок: #{@game.errors_allowed}\n\n)
 
     # вывод выйграл или проиграл
     if @game.won?
-      puts "Поздравляем, вы выиграли!"
+      puts "Поздравляем, вы выиграли!".colorize(:light_green)
     elsif @game.lost?
-      puts "Вы проиграли, загаданное слово: #{@game.word}"
+      puts "Вы проиграли, загаданное слово: #{@game.word}".colorize(:light_red)
     end
   end
 
