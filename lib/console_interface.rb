@@ -2,9 +2,9 @@ require 'colorize'
 
 class ConsoleInterface
   FIGURES =
-      Dir[__dir__ + '/../data/figures/*.txt'].
-      sort.
-      map { |file_name| File.read(file_name) }
+    Dir[__dir__ + '/../data/figures/*.txt'].
+    sort.
+    map { |file_name| File.read(file_name) }
 
   # на входе объект игры
   def initialize(game)
@@ -12,10 +12,12 @@ class ConsoleInterface
   end
   # вывод состояния (макета)
   def print_out
-    puts %(Слово: #{word_to_show}\n).colorize(:light_blue) +
-         %(#{figure}\n).colorize(:yellow) +
-         %(Ошибки (#{@game.errors_made}): #{errors_to_show}\n).colorize(:red) +
-         %(У вас осталось ошибок: #{@game.errors_allowed}\n\n)
+    puts <<~STATUS
+      Слово: #{word_to_show.colorize(:light_blue)}
+      #{figure.colorize(:yellow)}
+      Ошибки (#{@game.errors_made}): #{errors_to_show.colorize(:red)}
+      У вас осталось ошибок: #{@game.errors_allowed}
+    STATUS
 
     # вывод выйграл или проиграл
     if @game.won?
